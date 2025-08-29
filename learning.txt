@@ -1,0 +1,211 @@
+Here’s a clear, categorized breakdown of ES6 (ECMAScript 2015) features that changed JavaScript in a big way:
+
+1. Variables & Scoping
+
+let → Block-scoped variable (no hoisting issues like var)
+
+const → Block-scoped constant (can’t be reassigned)
+
+var → Still works, but function-scoped (not recommended for new code)
+
+let x = 10;
+const y = 20;
+var z = 30;
+
+2. Template Literals
+
+String interpolation with backticks `
+
+Multi-line strings without \n
+
+let name = "Shrija";
+console.log(`Hello, ${name}!`);
+
+3. Arrow Functions
+
+Shorter syntax, this is lexically bound
+
+const add = (a, b) => a + b;
+
+4. Default Parameters
+
+Assign default values to function parameters
+
+function greet(name = "Guest") {
+  console.log(`Hello, ${name}`);
+}
+
+5. Rest & Spread Operators
+
+Rest (...args) → Collects arguments into an array
+
+Spread (...array) → Expands an array/object
+
+function sum(...nums) {
+  return nums.reduce((a, b) => a + b, 0);
+}
+const arr = [1, 2, 3];
+console.log(...arr); // 1 2 3
+
+6. Destructuring
+
+Extract values from arrays/objects easily
+
+const [a, b] = [1, 2];
+const {name, age} = {name: "Shrija", age: 25};
+
+7. Enhanced Object Literals
+
+Shorthand for key-value, method definitions, computed keys
+
+let name = "Shrija";
+let person = {
+  name,
+  greet() {
+    console.log(`Hi ${this.name}`);
+  },
+  ["age" + 1]: 26
+};
+
+8. Modules
+
+Import/Export for modular code
+
+// export.js
+export const pi = 3.14;
+export default function greet() { console.log("Hello!"); }
+
+// import.js
+import greet, { pi } from './export.js';
+
+9. Promises
+
+Better async handling than callbacks
+
+new Promise((resolve, reject) => {
+  setTimeout(() => resolve("Done!"), 1000);
+}).then(console.log);
+
+10. Classes
+
+Cleaner syntax for prototypes
+
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  greet() {
+    console.log(`Hi, I'm ${this.name}`);
+  }
+}
+
+11. Iterators & for...of
+
+Iterate over iterable objects
+
+for (let val of [1, 2, 3]) console.log(val);
+
+12. Map, Set, WeakMap, WeakSet
+
+New data structures for unique values & key-value storage
+
+let set = new Set([1, 2, 2, 3]); // {1, 2, 3}
+
+13. Symbol
+
+Unique and immutable primitive
+
+let id = Symbol("id");
+
+14. Generators
+
+Functions that can pause execution with yield
+
+function* gen() {
+  yield 1;
+  yield 2;
+}
+
+15. const with Objects & Arrays
+
+The binding is constant, not the content
+
+const arr = [1, 2];
+arr.push(3); // Works
+
+
+If you want, I can make a visual mind map of ES6 features so it’s easier to remember them all at a glance.
+Would you like me to prepare that?
+
+You said:
+async await?
+ChatGPT said:
+
+async/await was introduced in ES2017 (not ES6) but is built on top of Promises and is now the preferred way to write asynchronous JavaScript code because it makes it look synchronous.
+
+1. async Function
+
+Declaring a function as async means it always returns a Promise.
+
+If you return a value, it’s automatically wrapped in Promise.resolve(value).
+
+async function greet() {
+  return "Hello";
+}
+
+greet().then(console.log); // "Hello"
+
+2. await Keyword
+
+Can only be used inside an async function.
+
+Pauses the execution until the Promise resolves.
+
+Returns the resolved value.
+
+If the Promise rejects, it throws an error (like throw in synchronous code).
+
+async function fetchData() {
+  let result = await Promise.resolve("Data loaded");
+  console.log(result);
+}
+
+fetchData();
+
+3. Error Handling
+
+With try...catch you can handle errors like synchronous code.
+
+async function getUser() {
+  try {
+    let user = await fetch("https://jsonplaceholder.typicode.com/users/1");
+    let data = await user.json();
+    console.log(data);
+  } catch (err) {
+    console.error("Error:", err);
+  }
+}
+
+4. Multiple Awaits in Parallel
+
+If tasks are independent, use Promise.all() for speed.
+
+async function getData() {
+  let [user, posts] = await Promise.all([
+    fetch("/user").then(res => res.json()),
+    fetch("/posts").then(res => res.json())
+  ]);
+}
+
+
+✅ Key Points to Remember
+
+async = always returns a Promise
+
+await = waits for the Promise to resolve/reject
+
+Makes async code look synchronous and easier to read
+
+Still non-blocking for the rest of the program
+
+If you want, I can show you a side-by-side example of the same async logic written with Promises vs async/await so you can see the readability difference.
