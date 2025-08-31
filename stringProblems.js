@@ -28,4 +28,26 @@ const removeOccurence=(s,part)=>{
     return s;
 }
 console.log(removeOccurence('daabcbaabcbc','abc'))
-// Longest Substring Without Repeating Characters
+
+
+
+// Convert Query String to Object
+// // "?name=sahil&age=25" => { name: 'sahil', age: '25' }
+
+function parseQueryString(str){
+    const params= new URLSearchParams(str)
+    console.log(params,"params")
+    let result={}
+    for(const [key,value] of params){
+        console.log(key,"key",value,"value")
+        if(result[key]){
+            result[key] =[].concat(result[key],value)
+        }else{
+            result[key] =value
+        }
+    }
+    return result;
+
+}
+
+console.log(parseQueryString("?name=sahil&age=25"))
